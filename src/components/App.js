@@ -10,10 +10,6 @@ import YTSearch from 'youtube-api-search';
 //Lodash
 import _ from 'lodash';
 
-const propTypes = {};
-
-const defaultProps = {};
-
 const API_KEY = 'AIzaSyDnV5dWaL6y8t-Qh8GjSjHkb-DX1Dq702E';
 
 class App extends Component {
@@ -23,37 +19,42 @@ class App extends Component {
 
         this.state = {
             videos : [],
-            selectedVideo : null
+            MainVideo : null
         };
 
-        this.videoSearch = this.videoSearch.bind(this);
+        this.handleVideoSearch = this.handleVideoSearch.bind(this);
+        this.handleVideoSelect = this.handleVideoSelect.bind(this);
     }
 
-    videoSearch(title){
+    handleVideoSearch(title){
         YTSearch({key : API_KEY, term : title}, (returnVideos) => {
             console.log(returnVideos);
             this.setState({
                 videos : returnVideos,
-                selectedVideo : returnVideos[0]
+                MainVideo : returnVideos[0]
             });
         });
     }
 
+    handleVideoSelect(key){
+        console.log("key!!!");
+        console.log(key);
+        alert(key+ " is selected");
+    }
+
     render() {
-        const videoSearch = _.debounce((title) => { this.videoSearch(title) }, 300 );
+        const videoSearch = _.debounce((title) => { this.handleVideoSearch(title) }, 300 );
 
         return (
             <div>
                 <SearchBar onInputTitle = {videoSearch}/>
                 <hr/>
-                <MainVideo video = {this.state.selectedVideo}/>
-                <VideoList list = {this.state.videos}/>
+                <MainVideo video = {this.state.MainVideo}/>
+                <VideoList list = {this.state.videos}
+                            onListSelect = {this.handleVideoSelect}/>
             </div>
         );
     }
 }
-
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
 
 export default App;

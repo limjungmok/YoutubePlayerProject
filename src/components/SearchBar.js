@@ -17,7 +17,7 @@ class SearchBar extends Component {
         var nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
-        
+
         this.props.onInputTitle(e.target.value);
         console.log(e.target.value);
         console.log(nextState);
@@ -25,7 +25,7 @@ class SearchBar extends Component {
 
     render() {
         return(
-            <div>
+            <div className="search-bar">
                 <input type="text"
                     name="searchTitle"
                     placeholder="Input title"

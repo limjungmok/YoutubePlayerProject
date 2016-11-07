@@ -1,30 +1,24 @@
 import React from 'react';
 import VideoListItem from './VideoListItem';
 
-const VideoList = (props) =>{
+const VideoList = (props) => {
 
-  if(props.list === null){
-    console.log("videoListComponent is null");
-    return(
-      <div>VideoList is Now Loading...</div>
-    );
-  }
-  else{
     console.log("videoList component");
-    console.log(props.list);
-    const mapToComponent = (data) =>{
-      return data.map((item, i) =>{
-        return <VideoListItem item = {item} key = {i}/>
-      });
+
+    const mapToComponent = (data) => {
+        return data.map((item, i) => {
+            return (<VideoListItem item={item}
+                                    key={i}
+                                    func={props.onListSelect} />);
+        });
     };
 
-    return(
-      <div>
-        {mapToComponent(props.list)}
-      </div>
+    return (
+        <ul className="col-md-4 list-group">
+            { mapToComponent(props.list) }
+        </ul>
     );
-  }
-};
 
+};
 
 export default VideoList;
