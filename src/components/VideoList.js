@@ -9,7 +9,7 @@ const VideoList = (props) => {
         return data.map((item, i) => {
             return (<VideoListItem item={item}
                                     key={i}
-                                    func={props.onListSelect} />);
+                                    func={props.onListSelect(i)} />);
         });
     };
 
